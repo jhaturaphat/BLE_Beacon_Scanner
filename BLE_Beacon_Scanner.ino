@@ -39,8 +39,9 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
         Serial.println(devUUID.toString().c_str());
         Serial.println("");
       }
-      else
+      else 
       {
+         //ถ้าเป็น iBecon
         if (advertisedDevice.haveManufacturerData() == true)
         {
           std::string strManufacturerData = advertisedDevice.getManufacturerData();
@@ -51,6 +52,9 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
           if (strManufacturerData.length() == 25 && cManufacturerData[0] == 0x4C && cManufacturerData[1] == 0x00)
           {
             Serial.println("Found an iBeacon!");
+            Serial.print("Device name: ");Serial.print(advertisedDevice.getName().c_str());  
+            Serial.print("  Macaddress: ");Serial.print(advertisedDevice.getAddress().toString().c_str());            
+            Serial.print("  RSSI: "); Serial.println(advertisedDevice.getRSSI(), DEC);
             BLEBeacon oBeacon = BLEBeacon();
             oBeacon.setData(strManufacturerData);
             Serial.printf("iBeacon Frame\n");
