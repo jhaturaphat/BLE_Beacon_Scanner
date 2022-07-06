@@ -29,7 +29,7 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
         Serial.println(advertisedDevice.getName().c_str());
         Serial.println("");        
         Serial.print("found address: ");
-        Serial.println(advertisedDevice.getAddress().toString());
+        Serial.println(advertisedDevice.getAddress().toString().c_str());
       }
 
       if (advertisedDevice.haveServiceUUID())
